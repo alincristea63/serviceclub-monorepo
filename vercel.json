@@ -1,13 +1,45 @@
 {
   "version": 2,
-  "routes": [
+  "builds": [
     {
-      "src": "^/academy/(.*)",
-      "dest": "/apps/academy/$1"
+      "src": "apps/hub-app/package.json",
+      "use": "@vercel/next",
+      "config": {
+        "distDir": ".next"
+      }
     },
     {
-      "src": "/(.*)",
-      "dest": "/apps/hub-app/$1"
+      "src": "apps/academy/package.json",
+      "use": "@vercel/next",
+      "config": {
+        "distDir": ".next"
+      }
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/apps/academy/$1",
+      "has": [
+        {
+          "type": "host",
+          "value": "academy.serviceclub-monorepo.vercel.app"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/apps/academy/$1",
+      "has": [
+        {
+          "type": "host",
+          "value": "academy.serviceclub.com"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/apps/hub-app/$1"
     }
   ]
 } 

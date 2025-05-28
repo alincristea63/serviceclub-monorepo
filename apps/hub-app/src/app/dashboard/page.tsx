@@ -10,31 +10,44 @@ const getVerticalUrl = (vertical: string) => {
       case 'academy':
         return 'http://localhost:3001';
       case 'jobs':
-        return '/jobs'; // Will be handled by hub-app in development
+        return '/jobs';
       case 'services':
-        return '/services'; // Will be handled by hub-app in development
+        return '/services';
       case 'shop':
-        return '/shop'; // Will be handled by hub-app in development
+        return '/shop';
       case 'communities':
-        return '/communities'; // Will be handled by hub-app in development
+        return '/communities';
       default:
         return '/';
     }
   } else {
-    // Production URLs (subdomains)
+    // Production URLs - Real subdomains
+    const currentHost = typeof window !== 'undefined' ? window.location.host : '';
+    const isVercel = currentHost.includes('vercel.app');
+    
     switch (vertical) {
       case 'academy':
-        return 'https://academy.serviceclub.com';
+        return isVercel 
+          ? 'https://academy.serviceclub-monorepo.vercel.app'
+          : 'https://academy.serviceclub.com';
       case 'jobs':
-        return 'https://jobs.serviceclub.com';
+        return isVercel
+          ? 'https://jobs.serviceclub-monorepo.vercel.app'
+          : 'https://jobs.serviceclub.com';
       case 'services':
-        return 'https://services.serviceclub.com';
+        return isVercel
+          ? 'https://services.serviceclub-monorepo.vercel.app'
+          : 'https://services.serviceclub.com';
       case 'shop':
-        return 'https://shop.serviceclub.com';
+        return isVercel
+          ? 'https://shop.serviceclub-monorepo.vercel.app'
+          : 'https://shop.serviceclub.com';
       case 'communities':
-        return 'https://community.serviceclub.com';
+        return isVercel
+          ? 'https://community.serviceclub-monorepo.vercel.app'
+          : 'https://community.serviceclub.com';
       default:
-        return 'https://serviceclub.com';
+        return '/';
     }
   }
 };
