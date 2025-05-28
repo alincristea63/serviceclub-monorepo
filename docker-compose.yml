@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  # Reverse Proxy / Load Balancer
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - hub-app
+      - academy
+    networks:
+      - serviceclub-network
+
+  # Hub App (Main Landing + Dashboard)
+  hub-app:
+    build:
+      context: .
+      dockerfile: apps/hub-app/Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    expose:
+      - "3000"
+    networks:
+      - serviceclub-network
+
+  # Academy App
+  academy:
+    build:
+      context: .
+      dockerfile: apps/academy/Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    expose:
+      - "3001"
+    networks:
+      - serviceclub-network
+
+  # Jobs App (placeholder)
+  jobs:
+    build:
+      context: .
+      dockerfile: apps/jobs/Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=3002
+    expose:
+      - "3002"
+    networks:
+      - serviceclub-network
+
+  # Shop App (placeholder)
+  shop:
+    build:
+      context: .
+      dockerfile: apps/shop/Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=3003
+    expose:
+      - "3003"
+    networks:
+      - serviceclub-network
+
+  # Services App (placeholder)
+  services:
+    build:
+      context: .
+      dockerfile: apps/services/Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=3004
+    expose:
+      - "3004"
+    networks:
+      - serviceclub-network
+
+  # Communities App (placeholder)
+  communities:
+    build:
+      context: .
+      dockerfile: apps/communities/Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=3005
+    expose:
+      - "3005"
+    networks:
+      - serviceclub-network
+
+networks:
+  serviceclub-network:
+    driver: bridge
+
+volumes:
+  ssl-certs: 
