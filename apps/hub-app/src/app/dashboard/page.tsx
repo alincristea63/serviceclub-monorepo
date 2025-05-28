@@ -21,31 +21,18 @@ const getVerticalUrl = (vertical: string) => {
         return '/';
     }
   } else {
-    // Production URLs - Real subdomains
-    const currentHost = typeof window !== 'undefined' ? window.location.host : '';
-    const isVercel = currentHost.includes('vercel.app');
-    
+    // Production URLs - Internal routes for now
     switch (vertical) {
       case 'academy':
-        return isVercel 
-          ? 'https://academy.serviceclub-monorepo.vercel.app'
-          : 'https://academy.serviceclub.com';
+        return '/academy'; // Will be configured as subdomain later
       case 'jobs':
-        return isVercel
-          ? 'https://jobs.serviceclub-monorepo.vercel.app'
-          : 'https://jobs.serviceclub.com';
+        return '/jobs';
       case 'services':
-        return isVercel
-          ? 'https://services.serviceclub-monorepo.vercel.app'
-          : 'https://services.serviceclub.com';
+        return '/services';
       case 'shop':
-        return isVercel
-          ? 'https://shop.serviceclub-monorepo.vercel.app'
-          : 'https://shop.serviceclub.com';
+        return '/shop';
       case 'communities':
-        return isVercel
-          ? 'https://community.serviceclub-monorepo.vercel.app'
-          : 'https://community.serviceclub.com';
+        return '/communities';
       default:
         return '/';
     }
