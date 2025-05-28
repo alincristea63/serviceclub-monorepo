@@ -1,39 +1,78 @@
 import Link from 'next/link';
 
+// Utility function to get the correct URL based on environment
+const getVerticalUrl = (vertical: string) => {
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  
+  if (isDevelopment) {
+    // Development URLs (localhost with different ports)
+    switch (vertical) {
+      case 'academy':
+        return 'http://localhost:3001';
+      case 'jobs':
+        return '/jobs'; // Will be handled by hub-app in development
+      case 'services':
+        return '/services'; // Will be handled by hub-app in development
+      case 'shop':
+        return '/shop'; // Will be handled by hub-app in development
+      case 'communities':
+        return '/communities'; // Will be handled by hub-app in development
+      default:
+        return '/';
+    }
+  } else {
+    // Production URLs (subdomains)
+    switch (vertical) {
+      case 'academy':
+        return 'https://academy.serviceclub.com';
+      case 'jobs':
+        return 'https://jobs.serviceclub.com';
+      case 'services':
+        return 'https://services.serviceclub.com';
+      case 'shop':
+        return 'https://shop.serviceclub.com';
+      case 'communities':
+        return 'https://community.serviceclub.com';
+      default:
+        return 'https://serviceclub.com';
+    }
+  }
+};
+
 export default function Dashboard() {
   const verticals = [
     {
       name: 'Jobs',
       icon: '💼',
-      href: '/jobs',
+      href: getVerticalUrl('jobs'),
       borderColor: 'border-red-75',
       bgColor: 'bg-white'
     },
     {
       name: 'Academy',
       icon: '🎓',
-      href: 'http://localhost:3001',
+      href: getVerticalUrl('academy'),
       borderColor: 'border-green-100',
       bgColor: 'bg-white'
     },
     {
       name: 'Services',
       icon: '🔧',
-      href: '/services',
+      href: getVerticalUrl('services'),
       borderColor: 'border-purple-100',
       bgColor: 'bg-white'
     },
     {
       name: 'Products',
       icon: '🛒',
-      href: '/shop',
+      href: getVerticalUrl('shop'),
       borderColor: 'border-[#C938E3]',
       bgColor: 'bg-white'
     },
     {
       name: 'Community',
       icon: '👥',
-      href: '/communities',
+      href: getVerticalUrl('communities'),
       borderColor: 'border-navy-100',
       bgColor: 'bg-white'
     }
