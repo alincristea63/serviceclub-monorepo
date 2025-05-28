@@ -85,7 +85,7 @@ export default function Dashboard() {
         <div className="space-y-8">
           {/* Row 1 */}
           <div className="flex justify-center gap-8">
-            {verticals.slice(0, 2).map((vertical, index) => (
+            {verticals.slice(0, 2).map((vertical) => (
               <Link
                 key={vertical.name}
                 href={vertical.href}
@@ -107,7 +107,7 @@ export default function Dashboard() {
 
           {/* Row 2 */}
           <div className="flex justify-center gap-8">
-            {verticals.slice(2, 4).map((vertical, index) => (
+            {verticals.slice(2, 4).map((vertical) => (
               <Link
                 key={vertical.name}
                 href={vertical.href}
@@ -129,7 +129,7 @@ export default function Dashboard() {
 
           {/* Row 3 */}
           <div className="flex justify-center">
-            {verticals.slice(4, 5).map((vertical, index) => (
+            {verticals.slice(4, 5).map((vertical) => (
               <Link
                 key={vertical.name}
                 href={vertical.href}
